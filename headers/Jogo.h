@@ -102,13 +102,13 @@ public:
             }
 
             // Verifica se há empate imediato
-            if (tabuleiro.verificarEmpateImediato()) {
-                tabuleiro.exibir();
-                std::cout << "Empate! Reiniciando o tabuleiro...\n";
-                log << "Empate! Reiniciando o tabuleiro...\n";
-                tabuleiro = Tabuleiro(); // Reinicia o tabuleiro
-                rodada = -1;             // Redefine a rodada (próxima será 0)
-            }
+            // if (tabuleiro.verificarEmpateImediato()) {
+            //     tabuleiro.exibir();
+            //     std::cout << "Empate! Reiniciando o tabuleiro...\n";
+            //     log << "Empate! Reiniciando o tabuleiro...\n";
+            //     tabuleiro = Tabuleiro(); // Reinicia o tabuleiro
+            //     rodada = -1;             // Redefine a rodada (próxima será 0)
+            // }
 
             rodada++;
         }
