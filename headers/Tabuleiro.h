@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include <utility> // Necessário para std::pair
+#include <utility>
 
 class Tabuleiro {
 private:
@@ -18,6 +18,7 @@ public:
                 grid[i][j] = ' ';
             }
         }
+        jogadas.clear(); // Limpa o histórico de jogadas
     }
 
     void exibir() const {
@@ -41,16 +42,6 @@ public:
             return false; // Jogada inválida
         }
 
-        // Se o tabuleiro estiver cheio, remove a jogada mais antiga
-        if (jogadas.size() == 9) {
-            std::pair<int, int> jogadaAntiga = jogadas.front(); // Obtém a jogada mais antiga
-            int linhaAntiga = jogadaAntiga.first;
-            int colunaAntiga = jogadaAntiga.second;
-
-            grid[linhaAntiga][colunaAntiga] = ' '; // Remove o símbolo mais antigo
-            jogadas.erase(jogadas.begin()); // Remove a jogada do histórico
-        }
-
         // Registra a nova jogada
         grid[linha][coluna] = simbolo;
         jogadas.emplace_back(linha, coluna); // Adiciona ao histórico de jogadas
@@ -69,6 +60,44 @@ public:
         // Verifica diagonais
         return (grid[0][0] == simbolo && grid[1][1] == simbolo && grid[2][2] == simbolo) ||
                (grid[0][2] == simbolo && grid[1][1] == simbolo && grid[2][0] == simbolo);
+    }
+
+    bool testeJogada(int linha, int coluna, char simbolo) {
+        // Verifica se a posição é válida
+        if (linha < 0 || linha >= 3 || coluna < 0 || coluna >= 3 || grid[linha][coluna] != ' ') {
+            return false;
+        }
+
+        // Faz a jogada temporariamente
+        grid[linha][coluna] = simbolo;
+
+        // Verifica se a jogada resultaria em vitória
+        bool resultado = verificarVitoria(simbolo);
+
+        // Reverte a jogada (volta o tabuleiro ao estado original)
+        grid[linha][coluna] = ' ';
+        return resultado;
+    }
+
+    bool verificarEmpateImediato() {
+        // O empate só pode ser validado se houver pelo menos 8 jogadas feitas
+        if (jogadas.size() < 8) {
+            return false; // Não é possível determinar empate com menos de 8 jogadas
+        }
+
+        // Verifica se ainda existem jogadas que podem levar a uma vitória
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (grid[i][j] == ' ') { // Posição vazia
+                    // Testa a jogada para cada jogador ('X' e 'O')
+                    if (testeJogada(i, j, 'X') || testeJogada(i, j, 'O')) {
+                        return false; // Ainda há uma jogada que pode levar à vitória
+                    }
+                }
+            }
+        }
+
+        return true; // Não há mais jogadas que podem levar à vitória
     }
 };
 

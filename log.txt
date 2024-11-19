@@ -1,6 +1,0 @@
-Rodada 1: Jogador 1 jogou em (0, 0) com 'X'
-Rodada 2: Computador jogou automaticamente com 'O'
-Rodada 3: Jogador 1 jogou em (0, 1) com 'X'
-Rodada 4: Computador jogou automaticamente com 'O'
-Rodada 5: Jogador 1 jogou em (0, 2) com 'X'
-Jogador 1 venceu o jogo.
