@@ -36,17 +36,25 @@ public:
             tabuleiro.exibir();
             Jogador* jogadorAtual = jogadores[rodada % 2];
 
-            while (true) {
-                std::cout << jogadorAtual->getNome() << " (" << jogadorAtual->getSimbolo() << ") jogue:\n";
-                int linha, coluna;
-                std::cin >> linha >> coluna;
+            if (JogadorComputador* computador = dynamic_cast<JogadorComputador*>(jogadorAtual)) {
+                // Jogada automática do computador
+                computador->jogarAutomaticamente(tabuleiro);
+                log << "Rodada " << rodada + 1 << ": " << computador->getNome()
+                    << " jogou automaticamente com '" << computador->getSimbolo() << "'\n";
+            } else {
+                // Jogada do jogador humano
+                while (true) {
+                    std::cout << jogadorAtual->getNome() << " (" << jogadorAtual->getSimbolo() << ") jogue:\n";
+                    int linha, coluna;
+                    std::cin >> linha >> coluna;
 
-                if (tabuleiro.fazerJogada(linha, coluna, jogadorAtual->getSimbolo())) {
-                    log << "Rodada " << rodada + 1 << ": " << jogadorAtual->getNome()
-                        << " jogou em (" << linha << ", " << coluna << ") com '" << jogadorAtual->getSimbolo() << "'\n";
-                    break;
-                } else {
-                    std::cout << "Jogada inválida! Tente novamente.\n";
+                    if (tabuleiro.fazerJogada(linha, coluna, jogadorAtual->getSimbolo())) {
+                        log << "Rodada " << rodada + 1 << ": " << jogadorAtual->getNome()
+                            << " jogou em (" << linha << ", " << coluna << ") com '" << jogadorAtual->getSimbolo() << "'\n";
+                        break;
+                    } else {
+                        std::cout << "Jogada inválida! Tente novamente.\n";
+                    }
                 }
             }
 

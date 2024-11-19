@@ -1,6 +1,6 @@
-#include "../headers/JogadorHumano.h"
-#include "../headers/JogadorComputador.h"
-#include "../headers/Jogo.h"
+#include "./headers/JogadorHumano.h"
+#include "./headers/JogadorComputador.h"
+#include "./headers/Jogo.h"
 #include <iostream>
 
 int main() {
