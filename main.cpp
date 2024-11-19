@@ -3,6 +3,7 @@
 #include "./headers/Jogo.h"
 #include <iostream>
 
+// inicio
 int main() {
     // Configuração dos jogadores
     Jogador* jogador1 = new JogadorHumano("Jogador 1", 'X');

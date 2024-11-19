@@ -1,6 +1,7 @@
 #ifndef JOGADOR_H
 #define JOGADOR_H
 
+//teste
 #include <string>
 
 class Jogador {
