@@ -1,0 +1,16 @@
+Rodada 1: Jogador 1 jogou em (0, 0) com 'X'
+Rodada 2: Computador jogou automaticamente com 'O'
+Rodada 3: Jogador 1 jogou em (1, 0) com 'X'
+Rodada 4: Computador jogou automaticamente com 'O'
+Rodada 5: Jogador 1 jogou em (0, 2) com 'X'
+Rodada 6: Computador jogou automaticamente com 'O'
+Rodada 7: Jogador 1 jogou em (2, 1) com 'X'
+Rodada 8: Computador jogou automaticamente com 'O'
+Empate! Reiniciando o tabuleiro...
+Rodada 1: Jogador 1 jogou em (0, 0) com 'X'
+Rodada 2: Computador jogou automaticamente com 'O'
+Rodada 3: Jogador 1 jogou em (2, 0) com 'X'
+Rodada 4: Computador jogou automaticamente com 'O'
+Rodada 5: Jogador 1 jogou em (2, 1) com 'X'
+Rodada 6: Computador jogou automaticamente com 'O'
+Computador venceu o jogo.

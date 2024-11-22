@@ -7,78 +7,89 @@
 #include <vector>
 #include <iostream>
 
-class Jogo {
+class Jogo
+{
 private:
-    Tabuleiro tabuleiro;                       // Tabuleiro do jogo
-    std::vector<Jogador*> jogadores;           // Vetor de jogadores (humanos ou computador)
-    std::ofstream log;                         // Arquivo para registrar o log do jogo
+    Tabuleiro tabuleiro;              // Tabuleiro do jogo
+    std::vector<Jogador *> jogadores; // Vetor de jogadores (humanos ou computador)
+    std::ofstream log;                // Arquivo para registrar o log do jogo
 
 public:
-    Jogo(Jogador* jogador1, Jogador* jogador2) {
+    Jogo(Jogador *jogador1, Jogador *jogador2)
+    {
         // Adiciona os jogadores ao vetor
         jogadores.push_back(jogador1);
         jogadores.push_back(jogador2);
 
         // Abre o arquivo de log
         log.open("log.txt", std::ios::out);
-        if (!log.is_open()) {
+        if (!log.is_open())
+        {
             throw std::runtime_error("Erro ao abrir o arquivo de log.");
         }
     }
 
-    ~Jogo() {
+    ~Jogo()
+    {
         log.close(); // Fecha o log ao final do jogo
-        for (auto jogador : jogadores) {
+        for (auto jogador : jogadores)
+        {
             delete jogador; // Libera a memória dos jogadores
         }
     }
 
-    void jogar() {
+    void jogar()
+    {
         int rodada = 0;
-        while (true) {
-            // Exibe o tabuleiro
+        while (true)
+        {
             tabuleiro.exibir();
+            Jogador *jogadorAtual = jogadores[rodada % 2];
 
-            // Alterna entre os jogadores (rodada % 2)
-            Jogador* jogadorAtual = jogadores[rodada % 2];
-
-            // Verifica se o jogador atual é um computador
-            if (JogadorComputador* computador = dynamic_cast<JogadorComputador*>(jogadorAtual)) {
+            if (JogadorComputador *computador = dynamic_cast<JogadorComputador *>(jogadorAtual))
+            {
                 computador->jogarAutomaticamente(tabuleiro);
                 log << "Rodada " << rodada + 1 << ": " << computador->getNome()
                     << " jogou automaticamente com '" << computador->getSimbolo() << "'\n";
-            } else {
-                // Jogada do jogador humano
-                while (true) {
-                    std::cout << jogadorAtual->getNome() << " (" << jogadorAtual->getSimbolo() << ") jogue:\n";
+            }
+            else
+            {
+                while (true)
+                {
+                    std::cout << "\033[1;32m" << jogadorAtual->getNome() << " (" << jogadorAtual->getSimbolo() << ") é a sua vez.\033[0m\n";
+                    std::cout << "Digite a linha e a coluna para jogar: ";
+
                     int linha, coluna;
                     std::cin >> linha >> coluna;
 
-                    if (tabuleiro.fazerJogada(linha, coluna, jogadorAtual->getSimbolo())) {
+                    if (tabuleiro.fazerJogada(linha, coluna, jogadorAtual->getSimbolo()))
+                    {
                         log << "Rodada " << rodada + 1 << ": " << jogadorAtual->getNome()
                             << " jogou em (" << linha << ", " << coluna << ") com '" << jogadorAtual->getSimbolo() << "'\n";
                         break;
-                    } else {
-                        std::cout << "Jogada inválida! Tente novamente.\n";
+                    }
+                    else
+                    {
+                        std::cout << "\033[1;31mJogada inválida! Tente novamente.\033[0m\n";
                     }
                 }
             }
 
-            // Verifica se houve vitória
-            if (tabuleiro.verificarVitoria(jogadorAtual->getSimbolo())) {
+            if (tabuleiro.verificarVitoria(jogadorAtual->getSimbolo()))
+            {
                 tabuleiro.exibir();
-                std::cout << jogadorAtual->getNome() << " venceu!\n";
+                std::cout << "\033[1;33m" << jogadorAtual->getNome() << " venceu! Parabéns!\033[0m\n";
                 log << jogadorAtual->getNome() << " venceu o jogo.\n";
                 break;
             }
 
-            // Verifica se há empate imediato
-            if (tabuleiro.verificarEmpateImediato()) {
+            if (tabuleiro.verificarEmpateImediato())
+            {
                 tabuleiro.exibir();
-                std::cout << "Empate! Reiniciando o tabuleiro...\n";
+                std::cout << "\033[1;36mEmpate! Reiniciando o tabuleiro...\033[0m\n";
                 log << "Empate! Reiniciando o tabuleiro...\n";
-                tabuleiro = Tabuleiro(); // Reinicia o tabuleiro
-                rodada = -1;             // Redefine a rodada (próxima será 0)
+                tabuleiro = Tabuleiro();
+                rodada = -1;
             }
 
             rodada++;
