@@ -134,10 +134,16 @@ public:
         return true; // Não há mais jogadas que podem levar à vitória
     }
 
+<<<<<<< HEAD
     void removerPeca(int linha, int coluna)
     {
         if (linha >= 0 && linha < 3 && coluna >= 0 && coluna < 3)
         {
+=======
+    // Adicionando a função removerPeca
+    void removerPeca(int linha, int coluna) {
+        if (linha >= 0 && linha < 3 && coluna >= 0 && coluna < 3) {
+>>>>>>> ef03e4c7c7ca59d59c95b82773d459bf832c7c70
             grid[linha][coluna] = ' '; // Limpa a posição no tabuleiro
         }
     }

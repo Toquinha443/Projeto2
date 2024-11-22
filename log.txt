@@ -1,0 +1,13 @@
+Rodada 1: Jogador 1 jogou em (1, 1) com 'X'
+Rodada 2: Jogador 2 jogou em (0, 1) com 'O'
+Rodada 3: Jogador 1 jogou em (0, 0) com 'X'
+Rodada 4: Jogador 2 jogou em (2, 2) com 'O'
+Rodada 5: Jogador 1 jogou em (2, 0) com 'X'
+Rodada 6: Jogador 2 jogou em (0, 2) com 'O'
+Rodada 7: Jogador 1 jogou em (1, 2) com 'X'
+Rodada 8: Jogador 2 jogou em (1, 1) com 'O'
+Rodada 9: Jogador 1 jogou em (1, 0) com 'X'
+Rodada 10: Jogador 2 jogou em (0, 0) com 'O'
+Rodada 11: Jogador 1 jogou em (0, 1) com 'X'
+Rodada 12: Jogador 2 jogou em (2, 2) com 'O'
+Jogador 2 venceu o jogo.
