@@ -6,8 +6,12 @@
 #include <iostream>
 
 class JogadorComputador : public Jogador {
+private:
+    // Variável para armazenar a última jogada
+    std::pair<int, int> ultimaJogada;
+
 public:
-    JogadorComputador(const std::string& nome, char simbolo) : Jogador(nome, simbolo) {}
+    JogadorComputador(const std::string& nome, char simbolo) : Jogador(nome, simbolo), ultimaJogada(-1, -1) {}
 
     void jogar() override {
         // Método virtual não usado diretamente
@@ -23,6 +27,7 @@ public:
 
         // 3. Joga no centro se estiver disponível
         if (tabuleiro.fazerJogada(1, 1, simbolo)) {
+            ultimaJogada = {1, 1};  // Atualiza a última jogada
             std::cout << nome << " jogou no centro (1, 1).\n";
             return;
         }
@@ -31,11 +36,17 @@ public:
         for (int i = 0; i < 3; ++i) {
             for (int j = 0; j < 3; ++j) {
                 if (tabuleiro.fazerJogada(i, j, simbolo)) {
+                    ultimaJogada = {i, j};  // Atualiza a última jogada
                     std::cout << nome << " jogou na posição (" << i << ", " << j << ").\n";
                     return;
                 }
             }
         }
+    }
+
+    // Método para obter a última jogada
+    std::pair<int, int> getUltimaJogada() const {
+        return ultimaJogada;
     }
 
 private:
@@ -45,6 +56,7 @@ private:
             for (int j = 0; j < 3; ++j) {
                 if (tabuleiro.testeJogada(i, j, jogador)) {
                     tabuleiro.fazerJogada(i, j, simbolo);
+                    ultimaJogada = {i, j};  // Atualiza a última jogada
                     std::cout << nome << " jogou inteligentemente na posição (" << i << ", " << j << ").\n";
                     return true;
                 }
